@@ -1,0 +1,30 @@
+[
+  {
+    "title": "Buy Me a Coffee",
+    "description": "Support my open-source tools and tutorials",
+    "href": "https://buymeacoffee.com/domenicotenace",
+    "icon": "coffee",
+    "highlight": true
+  },
+  {
+    "title": "Personal Website",
+    "description": "Explore my developer portfolio and projects",
+    "href": "https://domenicotenace.dev",
+    "icon": "portfolio",
+    "highlight": false
+  },
+  {
+    "title": "My Blog",
+    "description": "Articles about Astro, Javascript, and Open Source",
+    "href": "https://dev.to/dvalin99",
+    "icon": "blog",
+    "highlight": false
+  },
+  {
+    "title": "Get In Touch",
+    "description": "Send me an email or collaborate on a project",
+    "href": "mailto:domenico.tenace@proton.me",
+    "icon": "contact",
+    "highlight": false
+  }
+]

@@ -1,17 +1,163 @@
 ---
+import "../styles/global.css";
+import profile from "../data/profile.json";
+import links from "../data/links.json";
+import ProfileHeader from "../components/ProfileHeader.astro";
+import SocialLinks from "../components/SocialLinks.astro";
+import LinkButton from "../components/LinkButton.astro";
 
+// Custom SVG icons map matching the string keys in links.json
+const iconMap: Record<string, string> = {
+  coffee: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><line x1="6" y1="2" x2="6" y2="4"/><line x1="10" y1="2" x2="10" y2="4"/><line x1="14" y1="2" x2="14" y2="4"/></svg>`,
+  portfolio: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>`,
+  blog: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>`,
+  projects: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="12" y1="2" x2="12" y2="22"/></svg>`,
+  contact: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
+};
 ---
 
 <html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/svg+xml" href="/profile.webp" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- SEO Optimization -->
+    <title>{profile.name} | Developer Links</title>
+    <meta name="description" content={profile.bio} />
+
+    <!-- Google Fonts for custom styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oxanium:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link href="https://fonts.cdnfonts.com/css/sifonn" rel="stylesheet" />
+  </head>
+  <body> 
+
+    <!-- Main Page Wrapper -->
+    <main class="linktree-container">
+      <ProfileHeader
+        name={profile.name}
+        bio={profile.bio}
+        image={profile.avatar}
+      />
+
+      <SocialLinks
+        github={profile.socials.github}
+        linkedin={profile.socials.linkedin}
+        mastodon={profile.socials.mastodon}
+        youtube={profile.socials.youtube}
+      />
+
+      <!-- Links Wrapper -->
+      <section class="links-wrapper" id="links-container">
+        {
+          links.map((link) => (
+            <LinkButton
+              title={link.title}
+              description={link.description}
+              href={link.href}
+              icon={iconMap[link.icon]}
+              highlight={link.highlight}
+            />
+          ))
+        }
+      </section>
+
+      <!-- Footer -->
+      <footer class="footer-simple">
+        <p>© {new Date().getFullYear()} {profile.name}. Powered by Astro</p>
+      </footer>
+    </main>
+  </body>
 </html>
+
+<style is:global>
+  /* Global body reset and centering override to center everything vertically and horizontally */
+  html,
+  body {
+    margin: 0 !important;
+    padding: 0 !important;
+    height: 100%;
+    width: 100%;
+  }
+
+  body {
+    position: relative !important;
+    min-height: 100vh !important;
+    overflow-x: hidden !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important; /* Vertically center content */
+    align-items: center !important; /* Horizontally center content */
+    padding: 2rem 1rem !important;
+    box-sizing: border-box !important;
+    text-align: center !important;
+    max-width: 100% !important;
+  }
+</style>
+
+<style>
+  /* Core layout box */
+  .linktree-container {
+    width: 100%;
+    max-width: 580px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 10;
+  }
+
+  .links-wrapper {
+    width: 100%;
+    animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .footer-simple {
+    margin-top: 3rem;
+    margin-bottom: 0.5rem;
+    text-align: center;
+    width: 100%;
+  }
+
+  .footer-simple p {
+    font-family: var(--body, "Inter", sans-serif);
+    font-size: 0.75rem;
+    color: rgba(239, 241, 245, 0.4);
+    letter-spacing: 0.5px;
+    margin: 0;
+  }
+
+  @keyframes slide-up {
+    0% {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Responsive tuning */
+  @media (max-width: 600px) {
+    body {
+      padding: 1.5rem 0.75rem !important;
+    }
+    .footer-simple {
+      margin-top: 2rem;
+    }
+  }
+</style>

@@ -1,0 +1,130 @@
+---
+interface Props {
+  href: string;
+  title: string;
+  description?: string;
+  icon?: string;
+  highlight?: boolean;
+}
+
+const { href, title, description, icon, highlight = false } = Astro.props;
+---
+
+<a
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={`link-button-card ${highlight ? "highlighted" : ""}`}
+>
+  <div class="link-content">
+    {
+      icon && (
+        <div class="link-icon">
+          <Fragment set:html={icon} />
+        </div>
+      )
+    }
+    <div class="link-text-container">
+      <span class="link-title">{title}</span>
+      {description && <span class="link-description">{description}</span>}
+    </div>
+  </div>
+</a>
+
+<style>
+  .link-button-card {
+    position: relative;
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--linkRadius, 16px);
+    padding: 1rem 1.25rem;
+    margin-bottom: 0.9rem;
+    color: var(--text, #eff1f5);
+    transition: all 0.25s ease;
+    overflow: hidden;
+    backdrop-filter: blur(10px);
+  }
+
+  .link-button-card:hover {
+    transform: translateY(-2px);
+    border-color: rgba(250, 137, 45, 0.5);
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .link-button-card:active {
+    transform: translateY(0) scale(0.99);
+  }
+
+  .link-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    width: 100%;
+  }
+
+  .link-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    background: rgba(250, 137, 45, 0.1);
+    color: var(--button, #fa892d);
+    flex-shrink: 0;
+    transition: all 0.25s ease;
+  }
+
+  .link-button-card:hover .link-icon {
+    background: var(--button, #fa892d);
+    color: #000000;
+  }
+
+  .link-text-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex-grow: 1;
+    text-align: left;
+  }
+
+  .link-title {
+    font-family: var(--header, "Oxanium", sans-serif);
+    font-size: 1.05rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+
+  .link-description {
+    font-family: var(--body, "Inter", sans-serif);
+    font-size: 0.8rem;
+    color: rgba(239, 241, 245, 0.6);
+    margin-top: 0.2rem;
+  }
+
+  .link-arrow {
+    display: flex;
+    align-items: center;
+    color: rgba(255, 255, 255, 0.3);
+    transition: all 0.25s ease;
+    flex-shrink: 0;
+  }
+
+  .link-button-card:hover .link-arrow {
+    color: var(--button, #fa892d);
+    transform: translateX(4px);
+  }
+
+  /* Highlight styling - flat standing border */
+  .link-button-card.highlighted {
+    border: 1.5px solid var(--button, #fa892d);
+    background: rgba(250, 137, 45, 0.04);
+  }
+
+  .link-button-card.highlighted:hover {
+    background: rgba(250, 137, 45, 0.08);
+  }
+</style>

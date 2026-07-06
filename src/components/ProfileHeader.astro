@@ -1,0 +1,65 @@
+---
+interface Props {
+  name: string;
+  bio: string;
+  image: string;
+}
+
+const { name, bio, image } = Astro.props;
+---
+
+<div class="profile-header">
+  <div class="avatar-container">
+    <img src={image} alt={name} class="avatar-img" />
+  </div>
+  <h1 class="profile-name">{name}</h1>
+  <p class="profile-bio">{bio}</p>
+</div>
+
+<style>
+  .profile-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  .avatar-container {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    margin-bottom: 1.2rem;
+  }
+
+  .avatar-img {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    transition: transform 0.3s ease;
+  }
+
+  .avatar-container:hover .avatar-img {
+    transform: scale(1.05);
+  }
+
+  .profile-name {
+    font-family: var(--header, "Oxanium", sans-serif);
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text, #eff1f5);
+    margin: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .profile-bio {
+    font-family: var(--body, "Inter", sans-serif);
+    font-size: 0.95rem;
+    color: rgba(239, 241, 245, 0.8);
+    max-width: 320px;
+    margin: 0.6rem 0 0;
+    line-height: 1.5;
+  }
+</style>
