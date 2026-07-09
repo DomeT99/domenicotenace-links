@@ -27,25 +27,18 @@ const iconMap: Record<string, string> = {
     <title>{profile.name} | Developer Links</title>
     <meta name="description" content={profile.bio} />
 
-    <!-- Google Fonts for custom styling -->
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Oxanium:wght@400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Sofia+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
     <link href="https://fonts.cdnfonts.com/css/sifonn" rel="stylesheet" />
   </head>
   <body> 
-
     <!-- Main Page Wrapper -->
-    <main class="linktree-container">
+    <main class="linktree-container fade-in">
       <ProfileHeader
         name={profile.name}
         bio={profile.bio}
@@ -81,31 +74,6 @@ const iconMap: Record<string, string> = {
     </main>
   </body>
 </html>
-
-<style is:global>
-  /* Global body reset and centering override to center everything vertically and horizontally */
-  html,
-  body {
-    margin: 0 !important;
-    padding: 0 !important;
-    height: 100%;
-    width: 100%;
-  }
-
-  body {
-    position: relative !important;
-    min-height: 100vh !important;
-    overflow-x: hidden !important;
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: center !important; /* Vertically center content */
-    align-items: center !important; /* Horizontally center content */
-    padding: 2rem 1rem !important;
-    box-sizing: border-box !important;
-    text-align: center !important;
-    max-width: 100% !important;
-  }
-</style>
 
 <style>
   /* Core layout box */
@@ -153,9 +121,6 @@ const iconMap: Record<string, string> = {
 
   /* Responsive tuning */
   @media (max-width: 600px) {
-    body {
-      padding: 1.5rem 0.75rem !important;
-    }
     .footer-simple {
       margin-top: 2rem;
     }
