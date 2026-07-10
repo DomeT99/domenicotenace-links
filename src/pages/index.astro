@@ -14,6 +14,33 @@ const iconMap: Record<string, string> = {
   projects: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/><line x1="12" y1="2" x2="12" y2="22"/></svg>`,
   contact: `<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>`,
 };
+
+const siteUrl = profile.website || "https://domenicotenace.dev";
+const pageTitle = `${profile.name} | Developer Links`;
+const pageDescription = `Software Developer focused on Open Source, Astro and JavaScript. Discover my projects, tutorials, and support links.`;
+const pageKeywords = `Domenico Tenace, Software Developer, Open Source, Astro, JavaScript, developer links, portfolio, blog, contact`;
+const canonicalUrl = new URL("/", siteUrl).href;
+const ogImage = profile.avatar || "/profile.webp";
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  name: profile.name,
+  url: siteUrl,
+  image: ogImage,
+  sameAs: [
+    profile.socials.github,
+    profile.socials.linkedin,
+    profile.socials.mastodon,
+    profile.socials.youtube
+  ],
+  jobTitle: "Software Developer",
+  description: profile.bio,
+  mainEntityOfPage: {
+    "@type": "WebPage",
+    "@id": canonicalUrl
+  }
+};
 ---
 
 <html lang="en">
@@ -22,10 +49,33 @@ const iconMap: Record<string, string> = {
     <link rel="icon" type="image/svg+xml" href="/profile.webp" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#1e1e2e" />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href={canonicalUrl} />
 
     <!-- SEO Optimization -->
-    <title>{profile.name} | Developer Links</title>
-    <meta name="description" content={profile.bio} />
+    <title>{pageTitle}</title>
+    <meta name="description" content={pageDescription} />
+    <meta name="keywords" content={pageKeywords} />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:description" content={pageDescription} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:alt" content={`Profile avatar for ${profile.name}`} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={pageDescription} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <script type="application/ld+json">
+      {JSON.stringify(jsonLd)}
+    </script>
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -36,24 +86,26 @@ const iconMap: Record<string, string> = {
     />
     <link href="https://fonts.cdnfonts.com/css/sifonn" rel="stylesheet" />
   </head>
-  <body> 
+  <body>
     <!-- Main Page Wrapper -->
     <main class="linktree-container fade-in">
-      <ProfileHeader
-        name={profile.name}
-        bio={profile.bio}
-        image={profile.avatar}
-      />
+      <header class="page-header">
+        <ProfileHeader
+          name={profile.name}
+          bio={profile.bio}
+          image={profile.avatar}
+        />
 
-      <SocialLinks
-        github={profile.socials.github}
-        linkedin={profile.socials.linkedin}
-        mastodon={profile.socials.mastodon}
-        youtube={profile.socials.youtube}
-      />
+        <SocialLinks
+          github={profile.socials.github}
+          linkedin={profile.socials.linkedin}
+          mastodon={profile.socials.mastodon}
+          youtube={profile.socials.youtube}
+        />
+      </header>
 
       <!-- Links Wrapper -->
-      <section class="links-wrapper" id="links-container">
+      <section class="links-wrapper" id="links-container" aria-labelledby="links-heading"> 
         {
           links.map((link) => (
             <LinkButton
@@ -69,7 +121,7 @@ const iconMap: Record<string, string> = {
 
       <!-- Footer -->
       <footer class="footer-simple">
-        <p>© {new Date().getFullYear()} {profile.name}. Powered by Astro</p>
+        <p>© {new Date().getFullYear()} {profile.name}. Powered by <a href="https://astro.build" target="_blank" rel="noopener noreferrer">Astro</a></p>
       </footer>
     </main>
   </body>
