@@ -138,11 +138,22 @@ const jsonLd = {
     justify-content: center;
     align-items: center;
     z-index: 10;
+    padding: 0 0.5rem;
   }
 
   .links-wrapper {
     width: 100%;
     animation: slide-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .section-title {
+    font-family: var(--header, sans-serif);
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgba(239, 241, 245, 0.8);
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    margin: 0 0 1rem;
   }
 
   .footer-simple {
@@ -158,6 +169,31 @@ const jsonLd = {
     color: rgba(239, 241, 245, 0.4);
     letter-spacing: 0.5px;
     margin: 0;
+  }
+
+  @media (max-width: 520px) {
+    .footer-simple {
+      margin-top: 2rem;
+    }
+
+    .linktree-container {
+      padding: 0;
+    }
+
+    .section-title {
+      font-size: 0.95rem;
+      margin-bottom: 0.85rem;
+    }
+  }
+
+  @media (max-width: 430px) {
+    .footer-simple {
+      margin-top: 1.75rem;
+    }
+
+    .linktree-container {
+      max-width: 100%;
+    }
   }
 
   @keyframes slide-up {

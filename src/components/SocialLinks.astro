@@ -113,7 +113,8 @@ const { github, linkedin, mastodon, youtube } = Astro.props;
   .social-links {
     display: flex;
     justify-content: center;
-    gap: 1.2rem;
+    flex-wrap: wrap;
+    gap: clamp(0.85rem, 2vw, 1.2rem);
     margin-bottom: 2rem;
   }
 
