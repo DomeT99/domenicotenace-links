@@ -1,43 +1,54 @@
-# Astro Starter Kit: Minimal
+# Domenico Tenace Links
 
-```sh
-pnpm create astro@latest -- --template minimal
-```
+A simple personal link-in-bio website built with Astro. It showcases profile information, social links, and quick access buttons to websites, projects, and contact channels.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## Features
 
-## 🚀 Project Structure
+- Clean, minimalist landing page
+- Profile header with bio and social links
+- Custom link buttons for portfolio, blog, support, and contact
+- SEO metadata and social sharing tags
 
-Inside of your Astro project, you'll see the following folders and files:
+## Project Structure
 
 ```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+src/
+  components/     # Reusable Astro components
+  data/           # Profile and link content (JSON)
+  pages/          # Main page entry
+  styles/         # Global styles
+public/           # Static assets such as images and favicons
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+## Development
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+Install dependencies:
 
-Any static assets, like images, can be placed in the `public/` directory.
+```bash
+pnpm install
+```
 
-## 🧞 Commands
+Start the local development server:
 
-All commands are run from the root of the project, from a terminal:
+```bash
+pnpm dev
+```
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `pnpm install`             | Installs dependencies                            |
-| `pnpm dev`             | Starts local dev server at `localhost:4321`      |
-| `pnpm build`           | Build your production site to `./dist/`          |
-| `pnpm preview`         | Preview your build locally, before deploying     |
-| `pnpm astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `pnpm astro -- --help` | Get help using the Astro CLI                     |
+Build for production:
 
-## 👀 Want to learn more?
+```bash
+pnpm build
+```
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+Preview the production build:
+
+```bash
+pnpm preview
+```
+
+## Content Customization
+
+You can update the site content by editing:
+
+- `src/data/profile.json` for profile details and socials
+- `src/data/links.json` for the main buttons
